@@ -1,0 +1,22 @@
+.text1 {
+    position: absolute;
+    top: -50px;
+}
+
+.text2 {
+    position: absolute;
+}
+
+.textleft {
+    position: absolute;
+    top: 50px;
+    left: 250px;
+    width: 220px;
+}
+
+.textright {
+    position: absolute;
+    top: 50px;
+    left: 800px;
+    width: 220px;
+}

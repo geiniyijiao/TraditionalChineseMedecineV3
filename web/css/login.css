@@ -1,0 +1,66 @@
+.a {
+    position: relative;
+    top: 100px;
+    width: 1000px;
+    height: 550px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .8);
+    display: flex;
+}
+
+.b {
+    width: 800px;
+    height: 550px;
+    background-image: url("../image/adminimage/medicine.jpeg");
+    /* 让图片适应大小 */
+    background-size: cover;
+}
+
+.c {
+    width: 300px;
+    height: 550px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d {
+    width: 250px;
+    height: 500px;
+}
+
+.d h1 {
+    font: 900 30px '';
+}
+
+.e {
+    width: 230px;
+    margin: 20px 0;
+    outline: none;
+    border: 0;
+    padding: 10px;
+    border-bottom: 3px solid rgb(197, 128, 25);
+    font: 900 16px '';
+}
+
+.f {
+    float: right;
+    margin: 10px 0;
+}
+
+.g {
+    position: absolute;
+    margin: 20px;
+    margin-top: 30px;
+    display: block;
+    width: 200px;
+    height: 60px;
+    font: 900 30px '';
+    text-decoration: none;
+    line-height: 50px;
+    border-radius: 30px;
+    background-image: linear-gradient(to left,
+    #e0840b, #c57814);
+    text-align: center;
+    color: black;
+}

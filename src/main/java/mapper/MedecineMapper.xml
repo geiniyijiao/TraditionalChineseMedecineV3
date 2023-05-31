@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="main.java.mapper.MedecineMapper">
+    <resultMap id="BaseResultMap" type="main.java.bean.Medecine">
+        <id column="m_id" property="mId" jdbcType="INTEGER"/>
+        <result column="m_name" property="mName" jdbcType="VARCHAR"/>
+        <result column="m_type_id" property="mTypeId" jdbcType="INTEGER"/>
+        <result column="m_trait" property="mTrait" jdbcType="VARCHAR"/>
+        <result column="m_use" property="mUse" jdbcType="VARCHAR"/>
+        <result column="m_affect" property="mAffect" jdbcType="VARCHAR"/>
+        <result column="m_attention" property="mAttention" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        m_id
+        , m_name, m_type_id, m_trait, m_use, m_affect, m_attention
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="main.java.bean.MedecineExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from medecine
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from medecine
+        where m_id = #{mId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from medecine
+        where m_id = #{mId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="main.java.bean.MedecineExample">
+        delete from medecine
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="main.java.bean.Medecine">
+        insert into medecine (m_id, m_name, m_type_id,
+                              m_trait, m_use, m_affect,
+                              m_attention)
+        values (#{mId,jdbcType=INTEGER}, #{mName,jdbcType=VARCHAR}, #{mTypeId,jdbcType=INTEGER},
+                #{mTrait,jdbcType=VARCHAR}, #{mUse,jdbcType=VARCHAR}, #{mAffect,jdbcType=VARCHAR},
+                #{mAttention,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="main.java.bean.Medecine">
+        insert into medecine
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mId != null">
+                m_id,
+            </if>
+            <if test="mName != null">
+                m_name,
+            </if>
+            <if test="mTypeId != null">
+                m_type_id,
+            </if>
+            <if test="mTrait != null">
+                m_trait,
+            </if>
+            <if test="mUse != null">
+                m_use,
+            </if>
+            <if test="mAffect != null">
+                m_affect,
+            </if>
+            <if test="mAttention != null">
+                m_attention,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mId != null">
+                #{mId,jdbcType=INTEGER},
+            </if>
+            <if test="mName != null">
+                #{mName,jdbcType=VARCHAR},
+            </if>
+            <if test="mTypeId != null">
+                #{mTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="mTrait != null">
+                #{mTrait,jdbcType=VARCHAR},
+            </if>
+            <if test="mUse != null">
+                #{mUse,jdbcType=VARCHAR},
+            </if>
+            <if test="mAffect != null">
+                #{mAffect,jdbcType=VARCHAR},
+            </if>
+            <if test="mAttention != null">
+                #{mAttention,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="main.java.bean.MedecineExample" resultType="java.lang.Integer">
+        select count(*) from medecine
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update medecine
+        <set>
+            <if test="record.mId != null">
+                m_id = #{record.mId,jdbcType=INTEGER},
+            </if>
+            <if test="record.mName != null">
+                m_name = #{record.mName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mTypeId != null">
+                m_type_id = #{record.mTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.mTrait != null">
+                m_trait = #{record.mTrait,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mUse != null">
+                m_use = #{record.mUse,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mAffect != null">
+                m_affect = #{record.mAffect,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mAttention != null">
+                m_attention = #{record.mAttention,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update medecine
+        set m_id = #{record.mId,jdbcType=INTEGER},
+        m_name = #{record.mName,jdbcType=VARCHAR},
+        m_type_id = #{record.mTypeId,jdbcType=INTEGER},
+        m_trait = #{record.mTrait,jdbcType=VARCHAR},
+        m_use = #{record.mUse,jdbcType=VARCHAR},
+        m_affect = #{record.mAffect,jdbcType=VARCHAR},
+        m_attention = #{record.mAttention,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="main.java.bean.Medecine">
+        update medecine
+        <set>
+            <if test="mName != null">
+                m_name = #{mName,jdbcType=VARCHAR},
+            </if>
+            <if test="mTypeId != null">
+                m_type_id = #{mTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="mTrait != null">
+                m_trait = #{mTrait,jdbcType=VARCHAR},
+            </if>
+            <if test="mUse != null">
+                m_use = #{mUse,jdbcType=VARCHAR},
+            </if>
+            <if test="mAffect != null">
+                m_affect = #{mAffect,jdbcType=VARCHAR},
+            </if>
+            <if test="mAttention != null">
+                m_attention = #{mAttention,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where m_id = #{mId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="main.java.bean.Medecine">
+        update medecine
+        set m_name      = #{mName,jdbcType=VARCHAR},
+            m_type_id   = #{mTypeId,jdbcType=INTEGER},
+            m_trait     = #{mTrait,jdbcType=VARCHAR},
+            m_use       = #{mUse,jdbcType=VARCHAR},
+            m_affect    = #{mAffect,jdbcType=VARCHAR},
+            m_attention = #{mAttention,jdbcType=VARCHAR}
+        where m_id = #{mId,jdbcType=INTEGER}
+    </update>
+</mapper>

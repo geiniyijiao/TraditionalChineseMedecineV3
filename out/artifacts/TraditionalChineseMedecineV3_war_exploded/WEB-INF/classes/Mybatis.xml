@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 读取属性文件 -->
+    <properties resource="db.properties"></properties>
+    <!-- 配置分页组件 -->
+    <plugins>
+        <!-- 加载分页PageHelper类 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 配置分页的方言，mysql与oracle数据库分页语句不同 -->
+            <property name="dialect" value="mysql"/>
+            <!-- 启用分页的合理性 -->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+    <!-- 默认执行default调用被执行环境名称(id) -->
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 配置连接数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <property name="url" value="${jdbc.url}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 将映射文件注入到Mybatis中 -->
+    <mappers>
+        <!-- 批量加载,mapper代理注册方式 -->
+        <package name="main.java.mapper"/>
+    </mappers>
+</configuration>

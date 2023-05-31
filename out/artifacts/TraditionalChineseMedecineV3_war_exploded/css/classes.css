@@ -1,0 +1,21 @@
+.titname {
+    background-color: #d3611f;
+}
+
+.cc {
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
+
+.bbox {
+    display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+.padding {
+    padding-bottom: 10px;
+}

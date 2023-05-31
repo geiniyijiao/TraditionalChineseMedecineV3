@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="main.java.mapper.MeTypeMapper">
+    <resultMap id="BaseResultMap" type="main.java.bean.MeType">
+        <id column="m_type_id" property="mTypeId" jdbcType="INTEGER"/>
+        <result column="m_type_name" property="mTypeName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        m_type_id
+        , m_type_name
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="main.java.bean.MeTypeExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from me_type
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from me_type
+        where m_type_id = #{mTypeId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from me_type
+        where m_type_id = #{mTypeId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="main.java.bean.MeTypeExample">
+        delete from me_type
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="main.java.bean.MeType">
+        insert into me_type (m_type_id, m_type_name)
+        values (#{mTypeId,jdbcType=INTEGER}, #{mTypeName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="main.java.bean.MeType">
+        insert into me_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mTypeId != null">
+                m_type_id,
+            </if>
+            <if test="mTypeName != null">
+                m_type_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mTypeId != null">
+                #{mTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="mTypeName != null">
+                #{mTypeName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="main.java.bean.MeTypeExample" resultType="java.lang.Integer">
+        select count(*) from me_type
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update me_type
+        <set>
+            <if test="record.mTypeId != null">
+                m_type_id = #{record.mTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.mTypeName != null">
+                m_type_name = #{record.mTypeName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update me_type
+        set m_type_id = #{record.mTypeId,jdbcType=INTEGER},
+        m_type_name = #{record.mTypeName,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="main.java.bean.MeType">
+        update me_type
+        <set>
+            <if test="mTypeName != null">
+                m_type_name = #{mTypeName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where m_type_id = #{mTypeId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="main.java.bean.MeType">
+        update me_type
+        set m_type_name = #{mTypeName,jdbcType=VARCHAR}
+        where m_type_id = #{mTypeId,jdbcType=INTEGER}
+    </update>
+</mapper>
